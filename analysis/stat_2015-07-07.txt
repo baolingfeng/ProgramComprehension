@@ -1,0 +1,72 @@
+The time is from 2015-07-07 16:24:09.101 to 2015-07-07 17:38:07.708, the total duration is 1.233 hour(s)
+
+Bellow time may be idle time (idle threshold 5 minutes):
+from 2015-07-07 17:30:53.443 to 2015-07-07 17:37:13.213, duration is 6.329 minutes
+
+Application Usage:
+No Moniter Application Usage Time: 17.262 minutes
+Windows Explorer or Taskbar Usage Time: 11.697 minutes
+Process: chrome.exe, Time: 21.166 minutes
+Process: devenv.exe, Time: 15.123 minutes
+Process: iexplore.exe, Time: 1.360 minutes
+Process: notepad++.exe, Time: 1.009 minutes
+Process: notepad.exe, Time: 0.031 minutes
+
+The top 10 longest application windows
+Title: MPS > Host > Extensions  - chrome.exe, Duration: 1.233 minutes
+Title: MPS > Home-B  - chrome.exe, Duration: 0.891 minutes
+Title: MPS > Design Support > DC/DC Designer v3.05  - chrome.exe, Duration: 0.822 minutes
+Title: MPS > Product Admin  - chrome.exe, Duration: 0.763 minutes
+Title: D:\mps\src\Product\App_LocalResources\View.ascx.resx  - notepad++.exe, Duration: 0.259 minutes
+Title: MPS MP2359 MP2359 customized title  - chrome.exe, Duration: 0.251 minutes
+Title: D:\mps\src\InstallPackage\Modules\Product\App_LocalResources\View.ascx.resx  - notepad++.exe, Duration: 0.103 minutes
+Title: MPS > Home  - chrome.exe, Duration: 0.098 minutes
+Title: MPS > About MPS > Contact Us  - chrome.exe, Duration: 0.095 minutes
+Title: menudef.xml  - devenv.exe, Duration: 0.092 minutes
+
+Reaction Time 0.200000
+Application: Browser, Duration: 21.461 minutes, Number: 784, Percentage: 95.27%
+Application: IDE, Duration: 14.070 minutes, Number: 723, Percentage: 93.04%
+Application: Text Editor, Duration: 0.995 minutes, Number: 38, Percentage: 95.74%
+
+Reaction Time 0.400000
+Application: Browser, Duration: 20.571 minutes, Number: 601, Percentage: 91.32%
+Application: IDE, Duration: 13.061 minutes, Number: 512, Percentage: 86.36%
+Application: Text Editor, Duration: 0.958 minutes, Number: 30, Percentage: 92.17%
+
+Reaction Time 0.600000
+Application: Browser, Duration: 19.572 minutes, Number: 482, Percentage: 86.89%
+Application: IDE, Duration: 11.789 minutes, Number: 358, Percentage: 77.96%
+Application: Text Editor, Duration: 0.890 minutes, Number: 22, Percentage: 85.55%
+
+Reaction Time 0.800000
+Application: Browser, Duration: 18.350 minutes, Number: 377, Percentage: 81.46%
+Application: IDE, Duration: 10.338 minutes, Number: 232, Percentage: 68.36%
+Application: Text Editor, Duration: 0.844 minutes, Number: 18, Percentage: 81.15%
+
+Reaction Time 1.000000
+Application: Browser, Duration: 17.178 minutes, Number: 298, Percentage: 76.26%
+Application: IDE, Duration: 9.453 minutes, Number: 173, Percentage: 62.51%
+Application: Text Editor, Duration: 0.799 minutes, Number: 15, Percentage: 76.84%
+
+Reaction Time 1.200000
+Application: Browser, Duration: 16.059 minutes, Number: 237, Percentage: 71.29%
+Application: IDE, Duration: 8.690 minutes, Number: 131, Percentage: 57.46%
+Application: Text Editor, Duration: 0.726 minutes, Number: 11, Percentage: 69.80%
+
+Reaction Time 1.400000
+Application: Browser, Duration: 15.284 minutes, Number: 201, Percentage: 67.85%
+Application: IDE, Duration: 8.153 minutes, Number: 106, Percentage: 53.91%
+Application: Text Editor, Duration: 0.685 minutes, Number: 9, Percentage: 65.85%
+
+The top 10 longest reaction time events:
+Timestamp: 2015-07-07 17:12:24.892, Process: chrome.exe, Window: MPS > Host > Extensions , Reaction Time: 16.656 seconds
+Timestamp: 2015-07-07 16:31:43.193, Process: devenv.exe, Window: productdetail.js , Reaction Time: 19.792 seconds
+Timestamp: 2015-07-07 16:36:50.037, Process: devenv.exe, Window: productdetail.js , Reaction Time: 21.183 seconds
+Timestamp: 2015-07-07 16:48:15.763, Process: devenv.exe, Window: ProductDetail.ascx , Reaction Time: 24.190 seconds
+Timestamp: 2015-07-07 16:48:59.241, Process: chrome.exe, Window: MPS > Product Admin , Reaction Time: 24.488 seconds
+Timestamp: 2015-07-07 16:43:27.407, Process: devenv.exe, Window: ProductDetail.ascx , Reaction Time: 31.615 seconds
+Timestamp: 2015-07-07 17:10:37.378, Process: chrome.exe, Window: MPS > Product Admin , Reaction Time: 32.657 seconds
+Timestamp: 2015-07-07 16:37:16.292, Process: devenv.exe, Window: productdetail.js , Reaction Time: 35.049 seconds
+Timestamp: 2015-07-07 17:19:35.686, Process: iexplore.exe, Window: , Reaction Time: 37.776 seconds
+Timestamp: 2015-07-07 16:50:31.249, Process: chrome.exe, Window: MPS > Host > Extensions , Reaction Time: 216.704 seconds
