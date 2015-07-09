@@ -1,0 +1,18 @@
+Process, Names, Chinese Names, Type, Suffix
+firefox.exe, Mozilla Firefox, , Browser, 
+chrome.exe, Google Chrome, , Browser, 
+iexplore.exe, Internet Explorer|Windows Internet Explorer, , Browser, 
+eclipse.exe, Eclipse, , IDE, 
+javaw.exe, Eclipse, , IDE,
+devenv.exe, Microsoft Visual Studio, , IDE, 
+WINWORD.EXE, Word, , Office, .doc
+EXCEL.EXE, Excel, , Office, .xls|.csv
+POWERPNT.EXE, PowerPoint, , Office, .ppt
+VISIO.EXE, Visio, ,Office, .vsd
+sublime_text.exe, Sublime Text, , Text Editor, 
+notepad.exe, Notepad, 记事本, Text Editor, 
+notepad++.exe, Notepad++, , Text Editor,
+FoxitReader.exe, Foxit Reader, , PDF Reader, .pdf
+Acrobat.exe, Adobe Acrobat, , PDF Reader, .pdf
+AcroRd32.exe, Adobe Reader, , PDF Reader, .pdf
+explorer.exe, Windows Explorer, ,System, 

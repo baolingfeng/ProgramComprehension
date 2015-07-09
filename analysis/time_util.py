@@ -17,6 +17,9 @@ def format_datetime(dt, FMT=defalut_fmt):
 def now(FMT=defalut_fmt):
     return format_datetime(datetime.now(), FMT)
 
+def today(FMT='%Y-%m-%d'):
+    return format_datetime(datetime.now(), FMT)
+
 def get_interval(tdelta, mode='m'):
     if mode == 'm':
         return tdelta.total_seconds() / 60.0 
@@ -72,6 +75,12 @@ def day2timestamp(day, FMT=defalut_fmt):
     dt = datetime.strptime(day, '%Y-%m-%d')
     return datetime.strftime(dt, defalut_fmt)
 
+def day_with_interval(day, interval, FMT='%Y-%m-%d'):
+    dt = datetime.strptime(day, FMT)
+    next_dt = dt + timedelta(days=interval)
+
+    return datetime.strftime(next_dt, FMT)
+
 def next_day_timestamp(day):
     dt = datetime.strptime(day, '%Y-%m-%d')
     next_dt = dt + timedelta(days=1)
@@ -84,6 +93,5 @@ if __name__ == '__main__':
     #print str_to_unix_time('2015-06-25 17:11:53.442')
     #print time_diff('2015-06-25 15:31:54.299','2015-06-25 15:31:42.892')
     #print time_diff('2015-06-25 15:31:54.299','2015-06-25 15:31:42.892', FMT=defalut_fmt, mode='mi')
-    print is_in_day('2015-06-25 15:31:54.299', '2015-06-25')
-    print is_in_day('2015-06-25 15:31:54.299', '2015-06-24')
-    print is_in_day('2015-06-25 15:31:54.299', '2015-06-23')
+    
+    print day_with_interval('2015-07-08', -2)

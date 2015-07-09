@@ -1,0 +1,86 @@
+The time is from 2015-07-08 09:44:25.020 to 2015-07-08 17:39:23.531, the total duration is 7.916 hour(s)
+
+Bellow time may be idle time (idle threshold 5 minutes):
+from 2015-07-08 11:22:29.141 to 2015-07-08 12:22:45.376, duration is 60.271 minutes
+from 2015-07-08 12:27:01.375 to 2015-07-08 12:44:43.312, duration is 17.699 minutes
+from 2015-07-08 12:49:26.697 to 2015-07-08 13:07:28.118, duration is 18.024 minutes
+from 2015-07-08 13:27:57.606 to 2015-07-08 13:58:41.780, duration is 30.736 minutes
+from 2015-07-08 14:26:49.895 to 2015-07-08 14:51:15.945, duration is 24.434 minutes
+Total idle time: 2.519 hours, real working hours: 5.397
+
+Application Usage:
+Process: chrome.exe, Time: 76.328 minutes
+Process: devenv.exe, Time: 46.221 minutes
+Process: iexplore.exe, Time: 31.822 minutes
+Process: WINWORD.EXE, Time: 14.284 minutes
+Process: EXCEL.EXE, Time: 6.300 minutes
+Process: firefox.exe, Time: 4.719 minutes
+Process: notepad++.exe, Time: 2.741 minutes
+No Moniter Application Usage Time: 87.964 minutes
+Windows Explorer or Taskbar Usage Time: 53.433 minutes
+
+The top 10 longest application windows
+Title: Monthly Report  - chrome.exe, Duration: 1.218 minutes
+Title: MPS Secure Access SSL VPN  - iexplore.exe, Duration: 0.557 minutes
+Title: MPS > Home  - chrome.exe, Duration: 0.520 minutes
+Title: Google  - chrome.exe, Duration: 0.469 minutes
+Title: Mozilla Firefox Start Page  - firefox.exe, Duration: 0.445 minutes
+Title: MPS > Product Admin  - firefox.exe, Duration: 0.412 minutes
+Title: MPS > Design Support > AC/DC Design Support  - chrome.exe, Duration: 0.363 minutes
+Title: Task History  - chrome.exe, Duration: 0.315 minutes
+Title: MPS > Home  - iexplore.exe, Duration: 0.302 minutes
+Title: MPS > Home  - firefox.exe, Duration: 0.261 minutes
+
+Reaction Time 0.200000
+Application: Browser, Duration: 106.796 minutes, Number: 3779, Percentage: 94.62%
+Application: IDE, Duration: 43.026 minutes, Number: 2065, Percentage: 93.09%
+Application: Office, Duration: 19.471 minutes, Number: 615, Percentage: 94.59%
+Application: Text Editor, Duration: 2.432 minutes, Number: 184, Percentage: 88.73%
+
+Reaction Time 0.400000
+Application: Browser, Duration: 102.156 minutes, Number: 2809, Percentage: 90.51%
+Application: IDE, Duration: 38.958 minutes, Number: 1221, Percentage: 84.29%
+Application: Office, Duration: 18.386 minutes, Number: 381, Percentage: 89.32%
+Application: Text Editor, Duration: 1.908 minutes, Number: 67, Percentage: 69.63%
+
+Reaction Time 0.600000
+Application: Browser, Duration: 96.526 minutes, Number: 2130, Percentage: 85.52%
+Application: IDE, Duration: 36.165 minutes, Number: 883, Percentage: 78.24%
+Application: Office, Duration: 17.601 minutes, Number: 284, Percentage: 85.51%
+Application: Text Editor, Duration: 1.758 minutes, Number: 49, Percentage: 64.15%
+
+Reaction Time 0.800000
+Application: Browser, Duration: 91.301 minutes, Number: 1680, Percentage: 80.89%
+Application: IDE, Duration: 33.155 minutes, Number: 625, Percentage: 71.73%
+Application: Office, Duration: 16.806 minutes, Number: 216, Percentage: 81.64%
+Application: Text Editor, Duration: 1.552 minutes, Number: 31, Percentage: 56.63%
+
+Reaction Time 1.000000
+Application: Browser, Duration: 86.014 minutes, Number: 1327, Percentage: 76.21%
+Application: IDE, Duration: 30.641 minutes, Number: 458, Percentage: 66.29%
+Application: Office, Duration: 16.164 minutes, Number: 173, Percentage: 78.53%
+Application: Text Editor, Duration: 1.521 minutes, Number: 29, Percentage: 55.49%
+
+Reaction Time 1.200000
+Application: Browser, Duration: 81.324 minutes, Number: 1069, Percentage: 72.05%
+Application: IDE, Duration: 28.776 minutes, Number: 355, Percentage: 62.26%
+Application: Office, Duration: 15.633 minutes, Number: 144, Percentage: 75.95%
+Application: Text Editor, Duration: 1.469 minutes, Number: 26, Percentage: 53.60%
+
+Reaction Time 1.400000
+Application: Browser, Duration: 77.244 minutes, Number: 880, Percentage: 68.44%
+Application: IDE, Duration: 27.375 minutes, Number: 290, Percentage: 59.23%
+Application: Office, Duration: 15.003 minutes, Number: 115, Percentage: 72.89%
+Application: Text Editor, Duration: 1.338 minutes, Number: 20, Percentage: 48.81%
+
+The top 10 longest reaction time events:
+Timestamp: 2015-07-08 09:49:41.227, Process: WINWORD.EXE, Window: Microsoft Word Document, Reaction Time: 87.672 seconds
+Timestamp: 2015-07-08 11:00:06.059, Process: devenv.exe, Window: View.ascx , Reaction Time: 88.102 seconds
+Timestamp: 2015-07-08 17:27:11.199, Process: iexplore.exe, Window: MPS > Design Support > MPSmart , Reaction Time: 96.041 seconds
+Timestamp: 2015-07-08 16:32:41.673, Process: devenv.exe, Window: View.ascx , Reaction Time: 105.313 seconds
+Timestamp: 2015-07-08 16:08:46.818, Process: iexplore.exe, Window: MPS > Product Admin , Reaction Time: 133.592 seconds
+Timestamp: 2015-07-08 16:26:54.215, Process: iexplore.exe, Window: MPS > Product Admin , Reaction Time: 165.585 seconds
+Timestamp: 2015-07-08 15:32:02.628, Process: EXCEL.EXE, Window: MyMPSRegistrationInfo-07-08-2015-15-30-11.xlsx, Reaction Time: 181.793 seconds
+Timestamp: 2015-07-08 11:12:14.146, Process: devenv.exe, Window: mps.product.js , Reaction Time: 191.204 seconds
+Timestamp: 2015-07-08 14:59:08.453, Process: chrome.exe, Window: MPS > Product Admin , Reaction Time: 274.024 seconds
+Timestamp: 2015-07-08 16:51:41.072, Process: iexplore.exe, Window: MPS > Product Admin , Reaction Time: 294.355 seconds

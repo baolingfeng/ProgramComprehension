@@ -1,6 +1,9 @@
 #!/usr/bin/env 
 # -*- coding: utf8 -*-
 
+import getpass
+import sys
+from datetime import datetime
 import util
 import time_util
 from sqlite_dbimpl import sqlite_query
@@ -16,7 +19,8 @@ class EventManager:
     
     """
     def __init__(self, data_path):
-        self.conn = sqlite3.connect(data_path + '/log.db3')
+        self.dbfile = data_path + '/log.db3'
+        #self.conn = sqlite3.connect(data_path + '/log.db3')
         self.idle_threshold = 5 * 60 # 5 minutes in icpc paper
         self.apps = load_applications("applications.csv")
         self.app_dict = {app.process:app for app in self.apps}
@@ -26,7 +30,8 @@ class EventManager:
         return self
 
     def __exit__(self, type, value, traceback):
-        self.conn.close()
+        pass
+        #self.conn.close()
 
     def retrieve_events(self, day=None):
         """
@@ -46,12 +51,15 @@ class EventManager:
             where_condition = " WHERE timestamp>'" + start_time + "' and timestamp<'" + end_time + "'"
 
         #print where_condition
-
+        conn = sqlite3.connect(self.dbfile, timeout=30)
         sql = 'select * from tbl_mouse_event' + where_condition
-        self.mouse_events = sqlite_query(self.conn, sql)
+        self.mouse_events = sqlite_query(conn, sql)
+
+        print sql
+        print 'Mouse Events : %d' % (len(self.mouse_events,))
 
         sql = 'select * from tbl_click_action' + where_condition
-        click_actions = sqlite_query(self.conn, sql)
+        click_actions = sqlite_query(conn, sql)
 
         click_time_map = {c['timestamp']: idx for idx, c in enumerate(click_actions)}
         for i in range(len(self.mouse_events)):
@@ -60,10 +68,12 @@ class EventManager:
                 self.mouse_events[i].update(click_actions[click_time_map[t]])
 
         sql = 'select * from tbl_key_event' + where_condition
-        self.key_events = sqlite_query(self.conn, sql)
+        self.key_events = sqlite_query(conn, sql)
+
+        print 'Key Events : %d' % (len(self.key_events,))
 
         sql = 'select * from tbl_key_action' + where_condition
-        key_actions = sqlite_query(self.conn, sql)
+        key_actions = sqlite_query(conn, sql)
         key_time_map = {c['timestamp']: idx for idx, c in enumerate(key_actions)}
         for i in range(len(self.key_events)):
             t = self.key_events[i]['timestamp']
@@ -71,7 +81,7 @@ class EventManager:
                 self.key_events[i].update(key_actions[key_time_map[t]])
 
         strsql = 'select * from tbl_copy_event'
-        self.copy_events = sqlite_query(self.conn, strsql)
+        self.copy_events = sqlite_query(conn, strsql)
 
         self.combined_events = sorted(self.mouse_events + self.key_events, key=lambda k:k['timestamp'])
         total_length = len(self.combined_events)
@@ -90,6 +100,8 @@ class EventManager:
                     self.combined_events[i]['duration'] = 0
                 else:
                     self.combined_events[i]['duration'] = interval
+
+        conn.close()
 
     def filter_no_need(self):
         """
@@ -207,35 +219,35 @@ class EventManager:
 
         return event['window_name'] if event['window_name'] != '' else event['parent_window']
 
-    def stat(self):
-        filename = self.day if self.day else 'all'
-        with open('stat_'+filename+'.txt', 'w') as statfile:
-            start_time = em.combined_events[0]['timestamp']
-            end_time = em.combined_events[-1]['timestamp']
+    def stat(self, filename):
+        #filename = self.day if self.day else 'all'
+        with open(filename, 'w') as statfile:
+            start_time = self.combined_events[0]['timestamp']
+            end_time = self.combined_events[-1]['timestamp']
             total_duration = time_util.time_diff(start_time, end_time) 
-            print 'The time is from %s to %s, the total duration is %0.3f hour(s)' % (start_time, end_time, total_duration/3600)
+            #print 'The time is from %s to %s, the total duration is %0.3f hour(s)' % (start_time, end_time, total_duration/3600)
             statfile.write('The time is from %s to %s, the total duration is %0.3f hour(s)\n\n' % (start_time, end_time, total_duration/3600))
 
 
-            print 'Bellow time may be idle time (idle threshold %d minutes):' % (self.idle_threshold/60,)
+            #print 'Bellow time may be idle time (idle threshold %d minutes):' % (self.idle_threshold/60,)
             statfile.write('Bellow time may be idle time (idle threshold %d minutes):\n' % (self.idle_threshold/60,))
             total_idle = 0
             for idle in self.idle_times:
                 total_idle += idle[2]
-                print 'from %s to %s, duration is %0.3f minutes' % (idle[0], idle[1], idle[2]/60)
+                #print 'from %s to %s, duration is %0.3f minutes' % (idle[0], idle[1], idle[2]/60)
                 statfile.write('from %s to %s, duration is %0.3f minutes\n' % (idle[0], idle[1], idle[2]/60))
             statfile.write('Total idle time: %0.3f hours, real working hours: %0.3f\n\n' % (total_idle/3600, (total_duration-total_idle)/3600))
 
-            print 'Application Usage:'
+            #print 'Application Usage:'
             statfile.write('Application Usage:\n')
             process_list = [(key, self.process_stat[key]) for key in self.process_stat if key not in ('UNKNOWN', 'explorer.exe')]
             process_list = sorted(process_list, key=lambda k: k[1], reverse=True)
         
             for p in process_list:
-                print 'Process: %s, Time: %0.3f minutes' % (p[0], p[1]/60)
+                #print 'Process: %s, Time: %0.3f minutes' % (p[0], p[1]/60)
                 statfile.write('Process: %s, Time: %0.3f minutes\n' % (p[0], p[1]/60))
-            print 'No Moniter Application Usage Time: %0.3f minutes' %  (self.process_stat['UNKNOWN']/60,)
-            print 'Windows Explorer or Taskbar Usage Time: %0.3f minutes' %  (self.process_stat['explorer.exe']/60,)
+            #print 'No Moniter Application Usage Time: %0.3f minutes' %  (self.process_stat['UNKNOWN']/60,)
+            #print 'Windows Explorer or Taskbar Usage Time: %0.3f minutes' %  (self.process_stat['explorer.exe']/60,)
             statfile.write('No Moniter Application Usage Time: %0.3f minutes\n' %  (self.process_stat['UNKNOWN']/60,))
             statfile.write('Windows Explorer or Taskbar Usage Time: %0.3f minutes\n' %  (self.process_stat['explorer.exe']/60,))
             statfile.write('\n')
@@ -259,7 +271,7 @@ class EventManager:
             for idx, w in enumerate(window_list):
                 if idx<10:
                     statfile.write('Title: %s, Duration: %0.3f minutes\n' % (w[0], w[1]/60))
-                    print w[0], w[1]
+                    #print w[0], w[1]
             statfile.write('\n')
 
             apptype_dict = {}
@@ -273,7 +285,7 @@ class EventManager:
             rt_list = [(key, self.rt_res[key]) for key in self.rt_res]
             rt_list = sorted(rt_list, key=lambda k:k[0])
             for res in rt_list:
-                print 'Reaction Time %f' % (res[0])
+                #print 'Reaction Time %f' % (res[0])
                 statfile.write('Reaction Time %f\n' % (res[0]))
                 total_duration = res[1]['total_duration']
                 total_number = res[1]['total_number']
@@ -283,33 +295,62 @@ class EventManager:
                 durations = sorted(durations, key=lambda k:k[1], reverse=True)
                 #numbers = sorted(numbers, key=lambda k:k[1], reverse=True)
 
-                print 'Total Reaction Time: %0.3f minutes, Number: %d' % (total_duration/60, total_number)
+                #print 'Total Reaction Time: %0.3f minutes, Number: %d' % (total_duration/60, total_number)
                 for idx, d in enumerate(durations):
                     idx = d[0].find('_duration')
                     apptype = d[0][0:idx]
                     
                     if d[1] > 0:
                         apptype_total = apptype_dict[apptype]
-                        print 'Application: %s, Duration: %0.3f minutes, Number: %d, Percentage: %0.2f%%' %(apptype, d[1]/60, res[1][apptype+'_number'], d[1]/apptype_total * 100)
+                        #print 'Application: %s, Duration: %0.3f minutes, Number: %d, Percentage: %0.2f%%' %(apptype, d[1]/60, res[1][apptype+'_number'], d[1]/apptype_total * 100)
                         statfile.write('Application: %s, Duration: %0.3f minutes, Number: %d, Percentage: %0.2f%%\n' %(apptype, d[1]/60, res[1][apptype+'_number'], d[1]/apptype_total * 100))
                 statfile.write('\n')
 
-            print 'The top 10 longest reaction time events:'
+            #print 'The top 10 longest reaction time events:'
             statfile.write('The top 10 longest reaction time events:\n')
             for e in self.max_rt_events:
-                print 'Timestamp: %s, Process: %s, Window: %s, Reaction Time: %0.3f seconds' % (e['timestamp'],e['process_name'], self.get_window_title(e), e['duration'])
+                #print 'Timestamp: %s, Process: %s, Window: %s, Reaction Time: %0.3f seconds' % (e['timestamp'],e['process_name'], self.get_window_title(e), e['duration'])
                 statfile.write('Timestamp: %s, Process: %s, Window: %s, Reaction Time: %0.3f seconds\n' % (e['timestamp'],e['process_name'], self.get_window_title(e), e['duration']))
 
 if __name__ == '__main__':
     data_path = '../data/user2/log'
+    day = None
+    user_name = getpass.getuser()
+    try:
+        for idx, arg in enumerate(sys.argv):
+            if idx == 0:
+                continue
+
+            if arg[0] == '-':
+                if idx+1>=len(sys.argv):
+                    raise Exception('arguement incomplete')
+
+                next_arg = sys.argv[idx+1]
+                if arg[1:] == 't':
+                    if next_arg == 'today':
+                        day = time_util.today()
+                    elif next_arg == 'yesterday':
+                        day = time_util.day_with_interval(time_util.today(), -1)
+                    else:
+                        datetime.strptime(next_arg, '%Y-%m-%d')
+                        day = next_arg
+                elif arg[1:] == 'data':
+                    data_path = next_arg
+                elif arg[1:] == 'u':
+                    user_name = next_arg
+
+    except Exception, e:
+        print e
+ 
+    outputfile = 'stat_' + user_name + '_' + day + '.txt' if day else 'stat_' + user_name + '_all.txt'
 
     with EventManager(data_path) as em:
-        em.retrieve_events()
+        em.retrieve_events(day)
         #em.retrieve_events()
         em.filter_no_need()
         em.aggregate_events_in_rts()
         em.aggregate_events_in_process()
         em.aggregate_events_in_window()
         
-        em.stat()
+        em.stat(outputfile)
     
