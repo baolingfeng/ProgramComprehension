@@ -7,10 +7,13 @@ import time
 import getpass
 from rt import EventManager
 import time_util
+from ftp import send_to_ftp
 
 data_path = './log'
 #data_path = 'D:/baolingfeng/GitHub/ProgramComprehension/data/user1/log'
 user_name = getpass.getuser()
+
+config_map = {};
 
 def job():
     try:
@@ -18,8 +21,9 @@ def job():
 
         #data_path = 'D:/baolingfeng/GitHub/ProgramComprehension/data/user1/log'
         day = time_util.today()
+        #day = None
 
-        outputfile = 'stat_' + user_name + '_' + day + '.txt'
+        outputfile = 'stat_' + user_name + '_' + 'all' + '.txt'
 
         with EventManager(data_path) as em:
             em.retrieve_events(day)
@@ -30,12 +34,16 @@ def job():
             em.aggregate_events_in_window()
             
             em.stat(outputfile)
+
+        if 'ftp_host' in config_map:
+            send_to_ftp(outputfile, '', config_map['ftp_host'], config_map['ftp_user'], config_map['ftp_password'])
+
     except Exception, e:
         print e
    
 
 if __name__ == '__main__': 
-    execute_mode = 'day'   
+    execute_mode = 'second'   
     try:
         for idx, arg in enumerate(sys.argv):
             if idx == 0:
@@ -56,6 +64,17 @@ if __name__ == '__main__':
     except Exception, e:
         print e
     
+    with open('job_config.txt', 'r') as configfile:
+        lines = configfile.readlines()
+        for line in lines:
+            if line[0] == '#':
+                continue
+            
+            params = line.split('=')
+            param_name = params[0].lower().strip()
+            config_map[param_name] = params[1].strip()
+
+
     if execute_mode == 'hour':
         schedule.every().hour.do(job)
     elif execute_mode == 'day':

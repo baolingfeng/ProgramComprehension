@@ -8,14 +8,20 @@ import util
 import time_util
 from sqlite_dbimpl import sqlite_query
 import sqlite3
-from application import load_applications
-from application import is_main_window
+#from application import load_applications
+from application import *
+#from application import is_main_window
 
 class EventManager:
     """
     In ICPC2015 Paper:
     the idle period is determined if no interactions in 5 minutes
     the reaction time(RT) between low level events is set to 1 seconds. but it could be from 0.15 to 1.5 seconds 
+    
+    function retrieve_events: retrieve log events from log database
+    Mouse Event: self.mouse_events
+    Keyboard Event: self.key_events
+    Mouse and Keyboard Event: self.combined_events
     
     """
     def __init__(self, data_path):
@@ -52,7 +58,7 @@ class EventManager:
 
         #print where_condition
         conn = sqlite3.connect(self.dbfile, timeout=30)
-        sql = 'select * from tbl_mouse_event' + where_condition
+        sql = 'select *, \'mouse\' as type from tbl_mouse_event' + where_condition
         self.mouse_events = sqlite_query(conn, sql)
 
         print sql
@@ -67,7 +73,7 @@ class EventManager:
             if t in click_time_map:
                 self.mouse_events[i].update(click_actions[click_time_map[t]])
 
-        sql = 'select * from tbl_key_event' + where_condition
+        sql = 'select *, \'key\' as type from tbl_key_event' + where_condition
         self.key_events = sqlite_query(conn, sql)
 
         print 'Key Events : %d' % (len(self.key_events,))
@@ -80,7 +86,7 @@ class EventManager:
             if t in key_time_map:
                 self.key_events[i].update(key_actions[key_time_map[t]])
 
-        strsql = 'select * from tbl_copy_event'
+        strsql = 'select *, \'copy\' as type from tbl_copy_event'
         self.copy_events = sqlite_query(conn, strsql)
 
         self.combined_events = sorted(self.mouse_events + self.key_events, key=lambda k:k['timestamp'])
@@ -126,6 +132,31 @@ class EventManager:
 
         self.events_time_map = {e['timestamp']: idx for idx, e in enumerate(self.filter_events)}
 
+
+    def get_paste_events(self):
+        self.paste_events = []
+        for idx, e in enumerate(self.filter_events):
+            if is_paste_event(e):
+                self.paste_events.append(e)
+
+    def get_copy_paste(self):
+        self.get_paste_events()
+
+        copy_paste_events = sorted(self.copy_events + self.paste_events, key=lambda k:k['timestamp'])
+
+        for idx, e in enumerate(copy_paste_events):
+            if e['type'] != 'copy' and idx>0:
+                
+                pre_idx = idx-1
+                copy_event = copy_paste_events[pre_idx]
+                while copy_event['type'] != 'copy':
+                    pre_idx -= 1
+                    copy_event = copy_paste_events[pre_idx]
+
+                paste_event = e
+                #print copy_event
+                print 'Copy From process %s to %s with copy content: %s' % (copy_event['process_name'], paste_event['process_name'], copy_event['copy_text'])
+           
     def aggregate_events_in_rts(self):
         self.rt_res = {}
         for rt in self.rts:
@@ -313,7 +344,7 @@ class EventManager:
                 statfile.write('Timestamp: %s, Process: %s, Window: %s, Reaction Time: %0.3f seconds\n' % (e['timestamp'],e['process_name'], self.get_window_title(e), e['duration']))
 
 if __name__ == '__main__':
-    data_path = '../data/user2/log'
+    data_path = '../data/user1/log'
     day = None
     user_name = getpass.getuser()
     try:
@@ -338,6 +369,10 @@ if __name__ == '__main__':
                     data_path = next_arg
                 elif arg[1:] == 'u':
                     user_name = next_arg
+                elif arg[1:] == 'h' or arg[1:] == 'help':
+                    print '-t: time option, could be "today", "yesterday", or "YYYY-MM-DD"; no this option means all event data\n'
+                    print '-data: data path, e.g. D:/username/log\n'
+                    print '-u: username\n'
 
     except Exception, e:
         print e
@@ -348,9 +383,12 @@ if __name__ == '__main__':
         em.retrieve_events(day)
         #em.retrieve_events()
         em.filter_no_need()
-        em.aggregate_events_in_rts()
-        em.aggregate_events_in_process()
-        em.aggregate_events_in_window()
         
-        em.stat(outputfile)
+        em.get_copy_paste()
+
+        #em.aggregate_events_in_rts()
+        #em.aggregate_events_in_process()
+        #em.aggregate_events_in_window()
+        
+        #em.stat(outputfile)
     

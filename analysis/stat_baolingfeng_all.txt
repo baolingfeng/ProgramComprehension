@@ -1,0 +1,78 @@
+The time is from 2015-07-07 16:13:40.239 to 2015-07-08 18:17:06.890, the total duration is 26.057 hour(s)
+
+Bellow time may be idle time (idle threshold 5 minutes):
+from 2015-07-07 17:34:09.566 to 2015-07-07 18:03:21.950, duration is 29.206 minutes
+from 2015-07-07 18:04:35.398 to 2015-07-07 18:22:30.332, duration is 17.916 minutes
+from 2015-07-07 18:23:09.686 to 2015-07-07 18:32:02.418, duration is 8.879 minutes
+from 2015-07-07 18:36:33.897 to 2015-07-07 18:51:25.879, duration is 14.866 minutes
+from 2015-07-07 18:52:05.345 to 2015-07-07 19:02:23.772, duration is 10.307 minutes
+from 2015-07-07 19:07:09.490 to 2015-07-07 19:12:21.739, duration is 5.204 minutes
+from 2015-07-07 19:16:47.528 to 2015-07-07 19:50:31.541, duration is 33.734 minutes
+from 2015-07-07 20:01:58.326 to 2015-07-08 12:32:09.417, duration is 990.185 minutes
+from 2015-07-08 12:33:59.561 to 2015-07-08 13:17:23.293, duration is 43.396 minutes
+from 2015-07-08 13:18:00.055 to 2015-07-08 13:26:18.580, duration is 8.309 minutes
+from 2015-07-08 14:29:29.586 to 2015-07-08 14:34:31.985, duration is 5.040 minutes
+from 2015-07-08 14:45:54.834 to 2015-07-08 15:41:55.928, duration is 56.018 minutes
+from 2015-07-08 17:22:12.143 to 2015-07-08 17:27:55.258, duration is 5.719 minutes
+from 2015-07-08 17:29:16.877 to 2015-07-08 17:42:19.880, duration is 13.050 minutes
+from 2015-07-08 17:44:12.068 to 2015-07-08 18:15:08.990, duration is 30.949 minutes
+Total idle time: 21.213 hours, real working hours: 4.844
+
+Application Usage:
+Process: chrome.exe, Time: 145.729 minutes
+Process: sublime_text.exe, Time: 57.015 minutes
+Process: notepad++.exe, Time: 0.034 minutes
+No Moniter Application Usage Time: 46.992 minutes
+Windows Explorer or Taskbar Usage Time: 40.896 minutes
+
+The top 10 longest application windows
+Title: 172.16.17.39:8100/#/app/expense  - chrome.exe, Duration: 5.290 minutes
+Title: AngularJS: API: $animate  - chrome.exe, Duration: 2.148 minutes
+Title: _CSS_CSS__  - chrome.exe, Duration: 1.212 minutes
+Title: domready external script load - Google   - chrome.exe, Duration: 1.106 minutes
+Title: E:\sublimeWorkspace\maycur-mobile\www\views\expense\expense.html (meike-fontend, ui-router, ui-router-master, angularjs, maycur-mobile, client2)  - sublime_text.exe, Duration: 0.911 minutes
+Title: .ready() | jQuery API Documentation  - chrome.exe, Duration: 0.798 minutes
+Title: E:\sublimeWorkspace\maycur-mobile\www\views\approve\approve-list.html (meike-fontend, ui-router, ui-router-master, angularjs, maycur-mobile, client2)  - sublime_text.exe, Duration: 0.761 minutes
+Title: js_  - chrome.exe, Duration: 0.715 minutes
+Title: Grid: Evenly Spaced Columns - Ionic Components  - chrome.exe, Duration: 0.569 minutes
+Title: T+1_  - chrome.exe, Duration: 0.461 minutes
+
+Reaction Time 0.200000
+Application: Browser, Duration: 139.248 minutes, Number: 4912, Percentage: 95.55%
+Application: Text Editor, Duration: 52.955 minutes, Number: 3280, Percentage: 92.82%
+
+Reaction Time 0.400000
+Application: Browser, Duration: 132.193 minutes, Number: 3481, Percentage: 90.71%
+Application: Text Editor, Duration: 47.301 minutes, Number: 2052, Percentage: 82.91%
+
+Reaction Time 0.600000
+Application: Browser, Duration: 124.294 minutes, Number: 2522, Percentage: 85.29%
+Application: Text Editor, Duration: 42.039 minutes, Number: 1421, Percentage: 73.69%
+
+Reaction Time 0.800000
+Application: Browser, Duration: 116.290 minutes, Number: 1831, Percentage: 79.80%
+Application: Text Editor, Duration: 36.953 minutes, Number: 981, Percentage: 64.77%
+
+Reaction Time 1.000000
+Application: Browser, Duration: 109.463 minutes, Number: 1374, Percentage: 75.11%
+Application: Text Editor, Duration: 33.013 minutes, Number: 716, Percentage: 57.87%
+
+Reaction Time 1.200000
+Application: Browser, Duration: 104.149 minutes, Number: 1083, Percentage: 71.47%
+Application: Text Editor, Duration: 29.660 minutes, Number: 533, Percentage: 51.99%
+
+Reaction Time 1.400000
+Application: Browser, Duration: 99.657 minutes, Number: 875, Percentage: 68.39%
+Application: Text Editor, Duration: 27.275 minutes, Number: 423, Percentage: 47.81%
+
+The top 10 longest reaction time events:
+Timestamp: 2015-07-07 16:56:33.093, Process: chrome.exe, Window: AngularJS: API: ngAnimate , Reaction Time: 101.147 seconds
+Timestamp: 2015-07-07 16:58:26.535, Process: chrome.exe, Window: AngularJS: API: ngAnimate , Reaction Time: 116.729 seconds
+Timestamp: 2015-07-08 16:36:53.279, Process: chrome.exe, Window: angular datapicker - Google  , Reaction Time: 135.664 seconds
+Timestamp: 2015-07-07 18:33:58.274, Process: chrome.exe, Window: _ , Reaction Time: 148.319 seconds
+Timestamp: 2015-07-08 14:21:08.090, Process: chrome.exe, Window: 172.16.17.39:8100/#/app/approve-list , Reaction Time: 162.477 seconds
+Timestamp: 2015-07-08 13:46:57.982, Process: chrome.exe, Window: 172.16.17.39:8100/#/app/expense , Reaction Time: 173.584 seconds
+Timestamp: 2015-07-07 16:53:11.873, Process: chrome.exe, Window: AngularJS: API: ngAnimate , Reaction Time: 181.179 seconds
+Timestamp: 2015-07-07 19:58:18.370, Process: chrome.exe, Window: 172.16.17.39:8100/#/app/home , Reaction Time: 183.215 seconds
+Timestamp: 2015-07-07 17:22:38.486, Process: chrome.exe, Window: Chrome Legacy Window, Reaction Time: 216.259 seconds
+Timestamp: 2015-07-08 16:28:06.303, Process: chrome.exe, Window: angular datapicker - Google  , Reaction Time: 293.605 seconds
