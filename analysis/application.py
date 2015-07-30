@@ -1,7 +1,8 @@
-#!/usr/bin/env 
+#!/usr/bin/env
 # -*- coding: utf8 -*-
 
 import csv
+
 
 class Application:
     """
@@ -22,6 +23,7 @@ class Application:
     def __str__(self):
         return self.process + ', ' + self.name + ', ' + self.type + ', ' + self.chs_name + ', ' + self.suffixes
 
+
 def load_applications(csv_file='applications.csv'):
     applications = []
     with open(csv_file, 'rb') as csvfile:
@@ -40,6 +42,28 @@ def load_applications(csv_file='applications.csv'):
 
     return applications
 
+
+def load_controls(csv_file='controls.csv'):
+    controls = {}
+    with open(csv_file, 'rb') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        lang_idx = {}
+        for idx, row in enumerate(reader):
+            if idx == 0:
+                for idx2, lang in enumerate(row):
+                    lang = lang.strip()
+                    controls[lang] = []
+                    lang_idx[idx2] = lang
+                continue
+
+            for idx2, c in enumerate(row):
+                lang = lang_idx[idx2]
+
+                controls[lang].append(c.strip())
+
+    return controls
+
+
 def remove_special_char(window_name):
     """
     remove some special character since the file is modified and its name will add '*' or '?', etc or not recognized char
@@ -47,8 +71,9 @@ def remove_special_char(window_name):
     special_chars = ['*', '?']
     for c in special_chars:
         window_name = window_name.replace(c, '')
-    
+
     return window_name.strip()
+
 
 def get_idx(window_name, names):
     for name in names:
@@ -57,6 +82,7 @@ def get_idx(window_name, names):
             return idx
 
     return -1
+
 
 def is_main_window(event, app):
     window_name = remove_special_char(event['window_name'])
@@ -67,7 +93,7 @@ def is_main_window(event, app):
         if app.type == 'Office':
             for s in app.suffixes:
                 idx = get_idx(parent_window, app.names)
-                if idx>0:
+                if idx > 0:
                     window_name = parent_window[0:idx+1]
                     return True, window_name
                 else:
@@ -76,29 +102,46 @@ def is_main_window(event, app):
         else:
             idx = get_idx(window_name, app.names)
             idx2 = get_idx(parent_window, app.names)
-            if idx>0:
+            if idx > 0:
                 window_name = window_name[0:idx+1]
                 return True, window_name
-            elif idx2>0:
+            elif idx2 > 0:
                 #window_name = parent_window[0:idx+1]
                 return True, parent_window[0:idx2+1]
             else:
-                return False, window_name     
+                return False, window_name
     else:
         print 'warning: the application %s is not defined in applications.csv' % process_name
         return True, window_name
 
+
+controls = load_controls()
+
+
+def is_control(en_name, name):
+    idx = controls['English'].index(en_name)
+
+    for lang in controls:
+        if controls[lang][idx] == name:
+            return True
+
+    return False
+
+
+def is_paste_event(e):
+    if e['type'] == 'mouse' and 'action_name' in e:
+        action_name = e['action_name'].lower()
+        action_type = e['action_type']
+        if is_control('menu item', action_type) and (action_name.find('paste') >= 0 or action_name.find('粘帖') >= 0):
+            return True
+    elif e['type'] == 'key':
+        event_name = e['event_name']
+        if event_name == 'Ctrl+V':
+            return True
+
+    return False
+
+
 if __name__ == '__main__':
-    window_name = 'Chrome Legacy Window'
-    parent_window = 'MPS MP2359 1.2A, 24V, 1.4MHz Step-Down Converter. Available in SOT23-6 and TSOT23-6 Packages - Google Chrome'
-    idx = window_name.find(' - '+'Google Chrome')
-    idx2 = parent_window.find(' - '+'Google Chrome')
-    if idx>0:
-        window_name = window_name[0:idx+1]
-        print True, window_name
-    elif idx2>0:
-        #window_name = parent_window[0:idx+1]
-        print parent_window
-        print True, parent_window[0:idx2+1]
-    else:
-        print False, window_name     
+    #controls = load_controls()
+    print is_control('menu item', '菜单项')
